@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HectorMendez_Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      /* Remove all browser default whitespace */
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* These are the two supported page dimensions:
+       * Letter: 8.5in x 11 in
+       * A4:     210mm x 297mm
+        Using the minimum dimensions of Letter size and A4 size, */
+      --body-width: 210mm;
+      --body-height: 11in;
+
+      --margin-horizontal: 0.5in;
+      --margin-vertical: 0.5in;
+
+      --top-banner-height: 1.5in;
+      --sidebar-width: 2.9in;
+
+      --section-title-font-size: 14pt;
+      --company-title-font-size: 13.5pt;
+      --main-content-font-size: 11.0pt;
+      --sidebar-font-size: 10.5pt;
+    }
+
+    body {
+      width: var(--body-width);
+      height: var(--body-height);
+      margin: 10px auto 10px;
+      /* Center it in the webpage and add vertical margins for eye comfort */
+      box-sizing: content-box;
+      /* To be able to add borders without messing with the width/height of the print page size */
+      border: 2px solid black;
+      /* To be able to tell the boundaries between the resume and the webpage */
+    }
+
+    @media print {
+      body {
+        /* Reset hardcoded letter size and remove margins so print works correctly for both A4 and Letter size */
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        border: 0;
+      }
+    }
+
+    ol, ul {
+      list-style-type: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    #root {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      font-family: 'Open Sans';
+    }
+
+    #content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #sidebar {
+      background: #f5f6f4;
+      width: var(--sidebar-width);
+      padding-left: 1.9em;
+      padding-right: var(--margin-horizontal);
+      font-size: var(--sidebar-font-size);
+      padding-top: var(--margin-vertical);
+      padding-bottom: var(--margin-vertical);
+      font-weight: 300;
+      font-size: var(--sidebar-font-size)
+    }
+
+    header {
+      height: var(--top-banner-height);
+      padding-top: var(--margin-vertical);
+      background: #222935;
+      display: flex;
+      flex-direction: column;
+      font-family: Roboto;
+      color: white;
+      align-items: center;
+    }
+
+    #name {
+      font-size: 22pt;
+	    font-weight: bolder;
+    }
+
+    #profession {
+      font-size: 16pt;
+	    font-weight: lighter;
+    }
+
+    #main-content {
+      flex: 1;
+      padding-left: var(--margin-horizontal);
+      padding-right: 1.5em;
+      padding-top: 1.5em;
+      padding-bottom: var(--margin-vertical);
+      font-size: var(--main-content-font-size);
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.9em;
+    }
+
+    .section:last-child {
+      margin-bottom: 0em;
+    }
+
+    section-title {
+      font-family: Roboto;
+      font-size: var(--section-title-font-size);
+      margin-bottom: 0.4em;
+    }
+
+    .experience {
+      list-style-type: none;
+      margin-bottom: 1.5em;
+    }
+
+    .experience:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-title {
+      font-size: var(--company-title-font-size);
+      font-weight: bolder;
+      margin-bottom: 0.25em;
+    }
+
+    .experience-location {
+      font-size: calc(var(--company-title-font-size) - 2pt);
+      font-weight: 300;
+    }
+
+    .experience-subtitle {
+      font-style: italic;
+      margin-bottom: 0.25em;
+    }
+
+    .experience-descriptions {
+      padding-left: 1.75em;
+      line-height: 1.6em;
+      list-style-type: disc;
+    }
+
+    .experience-description {
+      padding-left: 0.25em;
+    }
+
+    .contact-info {
+      font-size: 9.5pt;
+      margin-bottom: 2.15em;
+    }
+
+    .contact-icon {
+      margin-right: 1em;
+    }
+
+    .contact-info-data {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.4em;
+    }
+
+    .contact-info-data:last-child {
+      margin-bottom: 0;
+    }
+
+    .dev-skill {
+      color: black;
+      font-size: 9pt;
+      background-color: lightgray;
+      display: inline-block;
+      padding: 0.5em;
+      line-height: 1;
+      white-space: nowrap;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 3px;
+      margin-bottom: 0.5em;
+    }
+
+    .education-entry {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1em;
+      line-height: 1.6em;
+    }
+
+    .education-entry:last-child {
+      margin-bottom: 0em;
+    }
+
+    .degree {
+      font-weight: bold;
+    }
+
+    .school-details {
+      font-weight: lighter;
+    }
+
+    .language {
+      font-weight: bold;
+      line-height: 1.6em;
+    }
+
+    .language-proficiency {
+      font-weight: 300;
+      font-style: italic;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Begin: templates for custom HTML elements -->
+  <template id="section-title-template">
+    <style>
+      hr {
+        margin: 0;
+        padding: 0;
+        border-width: 0.5px;
+      }
+      #root {
+        margin-bottom: 0.25em;
+        display: flex;
+        align-items: stretch;
+      }
+      #text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      #icon {
+        margin-right: 0.6em;
+      }
+    </style>
+    <div id="root">
+      <img id="icon" />
+      <div id="text">
+        <div id="title"></div>
+        <hr />
+      </div>
+    </div>
+  </template>
+  <!-- End: templates for custom HTML elements -->
+
+  <div id="root">
+    <main id="content">
+      <header>
+        <div id="name">HECTOR MENDEZ</div>
+        <div id="profession">Software Engineer</div>
+      </header>
+      <ul id="main-content">
+        <li class="section">
+          <section-title icon="experience_icon.png">
+            Work experience
+          </section-title>
+          <ol>
+            <li class="experience">
+              <div class="experience-title">Google LLC <span class="experience-location"> (California, USA)</span></div>
+              <div class="experience-subtitle">
+                Software Engineer Level 4, March 2021 — Present Day
+              </div>
+              <ul class="experience-descriptions">
+                <li class="experience-description">
+                  Worked in the Connect Cases team, a product that allows Google
+                  representative agents to handle and manage incoming customer
+                  support requests.
+                </li>
+                <li class="experience-description">
+                  Designed and implemented several features, going through
+                  formal and thorough review processes.
+                </li>
+                <li class="experience-description">
+                  Work activities span across all the full-stack software
+                  engineering spectrum: frontend, backend, databases, alerting,
+                  monitoring, deployment, releases, version control, and
+                  documentation.
+                </li>
+              </ul>
+            </li>
+            <li class="experience">
+              <div class="experience-title">Kalypso, A Rockwell Company <span class="experience-location"> &nbsp;(Monterrey,
+                  Mexico)</span>
+              </div>
+              <div class="experience-subtitle">
+                Technical Consultant, January 2017 — March 2021
+              </div>
+              <ul class="experience-descriptions">
+                <li class="experience-description">
+                  Developed IoT apps using the PTC ThingWorx platform.
+                </li>
+                <li class="experience-description">
+                  Implemented frameworks and libraries for internal use to help
+                  colleagues streamline their product development processes.
+                </li>
+                <li class="experience-description">
+                  Created automated unit test cases to ensure the quality of the
+                  delivered products to the client.
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </li>
+        <li class="section">
+          <section-title icon="projects_icon.png">Projects</section-title>
+          <ul>
+            <li class="experience">
+              <div class="experience-title">Vocalizer Singing App</div>
+              <div class="experience-subtitle">Mobile app, Personal Project, June 2018 — Present day</div>
+              <ul class="experience-descriptions">
+                <li class="experience-description">Developed a multi-platform singing app for Android and iOS to
+                  help singers practice their lessons.</li>
+                <li class="experience-description">Studied requirements from singers and teachers, showed the
+                  app progress and implemented their feedback.</li>
+                <li class="experience-description">Created the front-end with React-Native and used native code
+                  to build the music generating engine.</li>
+                <li class="experience-description">
+                  App currently published on the app stores and updates with
+                  new features and bug fixes are constantly released.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </main>
+    <ul id="sidebar">
+      <li class="contact-info">
+        <ul>
+          <li class="contact-info-data">
+            <img class="contact-icon" src="./img/email_icon.png" width="14" />
+            <a href="mailto:hectorricardomendez@gmail.com">
+              hectorricardomendez@gmail.com
+            </a>
+          </li>
+          <li class="contact-info-data">
+            <img class="contact-icon" src="./img/telephone_icon.png" width="14" />
+            +52 811 062 3389
+          </li>
+          <li class="contact-info-data">
+            <img class="contact-icon" src="./img/residence_icon.png" width="14" />
+            California, USA
+          </li>
+          <li class="contact-info-data">
+            <img class="contact-icon" src="./img/linkedin_icon.png" width="14" />
+            <a href="https://linkedin.com/in/hectorricardo">in/hectorricardo</a>
+          </li>
+        </ul>
+      </li>
+      <li class="section">
+        <section-title icon="profile_icon.png">Profile</section-title>
+        <p>I focus not only on developing high quality products,
+          but also on the process used to arrive to the end results.
+          Documentation, coding standards, and best practices are equally as
+          important as functionality or efficiency.</p>
+        </li>
+        <li class="section">
+        <section-title icon="devskills_icon.png">Dev Skills</section-title>
+        <ul>
+          <li class="dev-skill">java</li>
+          <li class="dev-skill">c/c++</li>
+          <li class="dev-skill">ios</li>
+          <li class="dev-skill">android</li>
+          <li class="dev-skill">kotlin</li>
+          <li class="dev-skill">swift</li>
+          <li class="dev-skill">dart</li>
+          <li class="dev-skill">scala</li>
+          <li class="dev-skill">python</li>
+          <li class="dev-skill">react</li>
+          <li class="dev-skill">react-native</li>
+          <li class="dev-skill">angular</li>
+          <li class="dev-skill">javascript</li>
+          <li class="dev-skill">html</li>
+          <li class="dev-skill">css</li>
+          <li class="dev-skill">php</li>
+          <li class="dev-skill">laravel</li>
+          <li class="dev-skill">git</li>
+        </ul>
+      </li>
+      <li class="section">
+        <section-title icon="education_icon.png">Education</section-title>
+        <ol>
+          <li class="education-entry">
+            <div class="degree">B.S. Computer Science</div>
+            <div class="school-details">
+              Tecnologico de Monterrey <br />
+              Monterrey, Mexico <br />
+              2012 — 2016 <br />
+              Exchange at EPFL, Switzerland
+            </div>
+          </li>
+          <li class="education-entry">
+            <div class="degree">IB Diploma Programme</div>
+            <div class="school-details">
+              Monterrey, Mexico <br />
+              2010 — 2012 <br />
+              Best of class Award
+            </div>
+          </li>
+        </ol>
+      </li>
+      <li class="section">
+        <section-title icon="language_icon.png">Languages</section-title>
+        <ul>
+          <li class="language">Spanish <span class="language-proficiency">(Native)</span></li>
+          <li class="language">English <span class="language-proficiency">(Advanced)</span></li>
+          <li class="language">French <span class="language-proficiency">(Level B2)</span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <script>
+    const { content } = document.getElementById('section-title-template');
+    customElements.define('section-title', class extends HTMLElement {
+      constructor() {
+        super();
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        const newDom = content.cloneNode(true);
+        const image = newDom.querySelector('#icon');
+        image.src = `./img/${this.getAttribute('icon')}`;
+        image.width = 34;
+        image.height = 34;
+        newDom.querySelector('#title').innerHTML = this.innerHTML.toUpperCase();
+        shadowRoot.appendChild(newDom);
+      }
+    });
+  </script>
+</body>
+
+</html>
