@@ -26,7 +26,7 @@
       --margin-horizontal: 0.5in;
       --margin-vertical: 0.5in;
 
-      --top-banner-height: 1.5in;
+      --top-banner-height: 1.7in;
       --sidebar-width: 2.9in;
 
       --section-title-font-size: 13.5pt;
@@ -102,13 +102,29 @@
     }
 
     #name {
-      font-size: 22pt;
+      font-size: 20pt;
 	    font-weight: bolder;
     }
 
     #profession {
-      font-size: 16pt;
+      font-size: 15pt;
 	    font-weight: lighter;
+    }
+
+    #contact-info {
+      margin-top: 0.75em;
+      display: flex;
+      font-size: 9.5pt;
+      width: 360px;
+      justify-content: space-between;
+    }
+
+    #contact-info > div {
+      display: flex;
+    }
+
+    .contact-icon {
+      margin-right: 0.75em;
     }
 
     #main-content {
@@ -171,25 +187,6 @@
       padding-left: 0.25em;
     }
 
-    .contact-info {
-      font-size: 9.5pt;
-      margin-bottom: 2.15em;
-    }
-
-    .contact-icon {
-      margin-right: 1em;
-    }
-
-    .contact-info-data {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.4em;
-    }
-
-    .contact-info-data:last-child {
-      margin-bottom: 0;
-    }
-
     .dev-skill {
       color: black;
       font-size: 9pt;
@@ -231,6 +228,10 @@
     .language-proficiency {
       font-weight: 300;
       font-style: italic;
+    }
+
+    .code {
+      font-family: Consolas;
     }
 
   </style>
@@ -275,6 +276,18 @@
       <header>
         <div id="name">HECTOR MENDEZ</div>
         <div id="profession">Software Engineer</div>
+        <div id="contact-info">
+          <div>
+            <img class="contact-icon" src="./img/email_icon_white.png" height="14" />
+            <a href="mailto:hectorricardomendez@gmail.com">
+              hectorricardomendez@gmail.com
+            </a>
+          </div>
+          <div>
+            <img class="contact-icon" src="./img/linkedin_icon.png" height="14" />
+            <a href="https://linkedin.com/in/hectorricardo">in/hectorricardo</a>
+          </div>
+        </div>
       </header>
       <ul id="main-content">
         <li class="section">
@@ -324,6 +337,9 @@
                   Created automated unit test cases to ensure the quality of the
                   delivered products to the client.
                 </li>
+                <li class="experience-description">
+                  Authored the <a href=""><span class="code">thingworx-connect</span></a> npm library to develop Thingworx apps.
+                </li>
               </ul>
             </li>
           </ol>
@@ -352,28 +368,6 @@
       </ul>
     </main>
     <ul id="sidebar">
-      <li class="contact-info">
-        <ul>
-          <li class="contact-info-data">
-            <img class="contact-icon" src="./img/email_icon.png" width="14" />
-            <a href="mailto:hectorricardomendez@gmail.com">
-              hectorricardomendez@gmail.com
-            </a>
-          </li>
-          <li class="contact-info-data">
-            <img class="contact-icon" src="./img/telephone_icon.png" width="14" />
-            +52 811 062 3389
-          </li>
-          <li class="contact-info-data">
-            <img class="contact-icon" src="./img/residence_icon.png" width="14" />
-            California, USA
-          </li>
-          <li class="contact-info-data">
-            <img class="contact-icon" src="./img/linkedin_icon.png" width="14" />
-            <a href="https://linkedin.com/in/hectorricardo">in/hectorricardo</a>
-          </li>
-        </ul>
-      </li>
       <li class="section">
         <section-title icon="profile_icon.png">Profile</section-title>
         <p>I focus not only on developing high quality products,
@@ -397,6 +391,7 @@
           <li class="dev-skill">react-native</li>
           <li class="dev-skill">angular</li>
           <li class="dev-skill">javascript</li>
+          <li class="dev-skill">node.js</li>
           <li class="dev-skill">html</li>
           <li class="dev-skill">css</li>
           <li class="dev-skill">php</li>
@@ -407,6 +402,14 @@
       <li class="section">
         <section-title icon="education_icon.png">Education</section-title>
         <ol>
+          <li class="education-entry">
+            <div class="degree">M.Sc. in Computer Science</div>
+            <div class="school-details">
+              University of Texas at Austin <br />
+              Austin, Texas, USA <br />
+              August 2022 — Present Day
+            </div>
+          </li>
           <li class="education-entry">
             <div class="degree">B.S. Computer Science</div>
             <div class="school-details">
