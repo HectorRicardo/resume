@@ -18,17 +18,29 @@
     }
 
     :root {
-      /* These are the two supported page dimensions:
-       * Letter: 8.5in x 11 in
-       * A4:     210mm x 297mm
-        Using the minimum dimensions of Letter size and A4 size, */
-      --body-width: 210mm;
-      --body-height: 11in;
+      --letter-resume-width: 8.5in;
+      --letter-resume-height: 11in;
+      --letter-header-height: 1.69in;
+      --letter-profession-margin-top: 0.2em;
+      --letter-contact-info-margin-top: 0.8em;
+      --letter-main-content-padding-top: 1.5em;
+      --letter-section-margin-bottom: 1.8em;
+      --letter-section-title-margin-bottom: 0.4em;
+      --letter-experience-margin-bottom: 1.5em;
+
+      --a4-resume-width: 210mm;
+      --a4-resume-height: 297mm;
+      --a4-header-height: 1.8in;
+      --a4-profession-margin-top: 0.3em;
+      --a4-contact-info-margin-top: 1em;
+      --a4-main-content-padding-top: 2.1em;
+      --a4-section-margin-bottom: 2.5em;
+      --a4-section-title-margin-bottom: 0.7em;
+      --a4-experience-margin-bottom: 2em;
 
       --margin-horizontal: 0.5in;
       --margin-vertical: 0.5in;
 
-      --top-banner-height: 1.69in;
       --sidebar-width: 2.9in;
 
       --name-font-size: 18.5pt;
@@ -48,11 +60,26 @@
       color: inherit;
     }
 
+    #body-helper {
+      display: flex;
+      align-items: flex-start;
+      margin: 30px 0;
+    }
+
+    #settings {
+      margin-left: 100px;
+      padding: 0.5em;
+      border: 1px solid black;
+    }
+
+    #download-link {
+      text-decoration: underline;
+      color: blue;
+    }
+
     #resume {
-      width: var(--body-width);
-      height: var(--body-height);
-      /* Center it in the webpage and add vertical margins for eye comfort */
-      margin: 10px auto 10px;
+      /* Center it horizontally in the space available */
+      margin: 0 auto;
       /* To be able to add borders without messing with the width/height of the print page size */
       box-sizing: content-box;
       /* To be able to tell the boundaries between the resume and the webpage */
@@ -63,6 +90,14 @@
     }
 
     @media print {
+      #body-helper {
+        margin: 0;
+      }
+
+      #settings {
+        display: none;
+      }
+
       #resume {
         /* Reset hardcoded letter size and remove margins so print works correctly for both A4 and Letter size */
         width: 100vw !important;
@@ -97,7 +132,6 @@
     }
 
     #header {
-      height: var(--top-banner-height);
       padding-top: var(--margin-vertical);
       background: #222935;
       display: flex;
@@ -118,7 +152,6 @@
     }
 
     #contact-info {
-      margin-top: 0.75em;
       display: flex;
       font-size: 9.5pt;
       width: 3.5in;
@@ -139,7 +172,6 @@
       flex: 1;
       padding-left: var(--margin-horizontal);
       padding-right: 1.5em;
-      padding-top: 1.5em;
       padding-bottom: var(--margin-vertical);
       font-size: var(--main-content-font-size);
       overflow: hidden;
@@ -148,26 +180,15 @@
     .section {
       display: flex;
       flex-direction: column;
-      margin-bottom: 1.8em;
-    }
-
-    .section:last-child {
-      margin-bottom: 0em;
     }
 
     section-title {
       font-family: Roboto;
       font-size: var(--section-title-font-size);
-      margin-bottom: 0.4em;
     }
 
     .experience {
       list-style-type: none;
-      margin-bottom: 1.5em;
-    }
-
-    .experience:last-child {
-      margin-bottom: 0;
     }
 
     .experience-header {
@@ -287,6 +308,36 @@
   <!-- End: templates for custom HTML elements -->
 
   <div id="body-helper">
+    <div id="settings">
+      <div>
+        <p>Page size:</p>
+        <br />
+        <div id="page-size-select">
+          <input type="radio" name="resume-size" id="page-size-letter-option" value="letter">
+          <label for="page-size-letter-option">Letter</label><br />
+          <input type="radio" name="resume-size" id="page-size-a4-option" value="a4">
+          <label for="page-size-a4-option">A4</label>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div>
+        <p>Language (under construction):</p>
+        <br />
+        <input type="radio" name="language" id="language-en-option" value="english" checked>
+        <label for="language-en-option">English</label><br />
+        <input type="radio" name="language" id="language-es-option" value="spanish" disabled>
+        <label for="language-es-option">Spanish</label><br />
+        <input type="radio" name="language" id="language-fr-option" value="french" disabled>
+        <label for="language-fr-option">French</label>
+      </div>
+      <br />
+      <br />
+      <p>Download link:</p>
+      <br>
+      <a id="download-link" href="#"></a>
+    </div>
+
     <div id="resume">
       <main id="content">
         <header id="header">
@@ -498,6 +549,116 @@
         shadowRoot.appendChild(newDom);
       }
     });
+  </script>
+  <script>
+    const style = getComputedStyle(document.documentElement);
+    
+    const LETTER_DIMENSIONS = createDimensions(
+      style.getPropertyValue('--letter-resume-width'),
+      style.getPropertyValue('--letter-resume-height'),
+      style.getPropertyValue('--letter-header-height'),
+      style.getPropertyValue('--letter-profession-margin-top'),
+      style.getPropertyValue('--letter-contact-info-margin-top'),
+      style.getPropertyValue('--letter-main-content-padding-top'),
+      style.getPropertyValue('--letter-section-margin-bottom'),
+      style.getPropertyValue('--letter-section-title-margin-bottom'),
+      style.getPropertyValue('--letter-experience-margin-bottom'),
+    );
+    const A4_DIMENSIONS = createDimensions(
+      style.getPropertyValue('--a4-resume-width'),
+      style.getPropertyValue('--a4-resume-height'),
+      style.getPropertyValue('--a4-header-height'),
+      style.getPropertyValue('--a4-profession-margin-top'),
+      style.getPropertyValue('--a4-contact-info-margin-top'),
+      style.getPropertyValue('--a4-main-content-padding-top'),
+      style.getPropertyValue('--a4-section-margin-bottom'),
+      style.getPropertyValue('--a4-section-title-margin-bottom'),
+      style.getPropertyValue('--a4-experience-margin-bottom'),
+    );
+
+    const resumeRoot = document.getElementById('resume');
+    const header = document.getElementById('header');
+    const profession = document.getElementById('profession');
+    const contactInfo = document.getElementById('contact-info');
+    const mainContent = document.getElementById('main-content');
+    const sections = getElementsExceptLast('section');
+    const sectionTitles = document.getElementsByTagName('section-title');
+    const experiences = getElementsExceptLast('experience');
+
+    const downloadLink = document.getElementById('download-link');
+    const pageSizeLetterOption = document.getElementById('page-size-letter-option');
+
+    pageSizeLetterOption.onclick = () => {
+      setDownloadLink(getSelectedLanguage(), 'letter');
+      setPageDimensions(LETTER_DIMENSIONS);
+    };
+
+    document.getElementById('page-size-a4-option').onclick = () => {
+      setDownloadLink(getSelectedLanguage(), 'a4');
+      setPageDimensions(A4_DIMENSIONS);
+    };
+
+    pageSizeLetterOption.click();
+
+    function getSelectedLanguage() {
+      return document.querySelector('[name="language"]:checked').value;
+    }
+
+    function getSelectedSize() {
+      return document.querySelector('[name="resume-size"]:checked').value;
+    }
+
+    function setDownloadLink(language, size) {
+      const filename = `resume_${language}_${size}_size.pdf`;
+      downloadLink.innerHTML = filename;
+      downloadLink.href = `https://github.com/HectorRicardo/resume/raw/main/pdfs/${filename}`;
+    }
+
+    function setPageDimensions(dimensions) {
+      resume.style.width = dimensions.width;
+      resume.style.height = dimensions.height;
+      header.style.height = dimensions.headerHeight;
+      profession.style.marginTop = dimensions.professionMarginTop;
+      contactInfo.style.marginTop = dimensions.contactInfoMarginTop;
+      mainContent.style.paddingTop = dimensions.mainContentPaddingTop;
+      for (const section of sections) {
+        section.style.marginBottom = dimensions.sectionMarginBottom;
+      }
+      for (const sectionTitle of sectionTitles) {
+        sectionTitle.style.marginBottom = dimensions.sectionTitleMarginBottom;
+      }
+      for (const experience of experiences) {
+        experience.style.marginBottom = dimensions.experienceMarginBottom;
+      }
+    }
+
+    function createDimensions(
+      width,
+      height,
+      headerHeight,
+      professionMarginTop,
+      contactInfoMarginTop,
+      mainContentPaddingTop,
+      sectionMarginBottom,
+      sectionTitleMarginBottom,
+      experienceMarginBottom,
+    ) {
+      return Object.freeze({
+        width,
+        height,
+        headerHeight,
+        professionMarginTop,
+        contactInfoMarginTop,
+        mainContentPaddingTop,
+        sectionMarginBottom,
+        sectionTitleMarginBottom,
+        experienceMarginBottom,
+      });
+    }
+
+    function getElementsExceptLast(className) {
+      return document.querySelectorAll(`.${className}:not(:last-child)`);
+    }
   </script>
 </body>
 
